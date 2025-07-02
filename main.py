@@ -170,6 +170,11 @@ class FolderTreeVisualizer(QMainWindow):
         # اتصال سیگنال ها
         self.folder_tree.selectionModel().selectionChanged.connect(self.update_root_selection)
         self.folder_model.dataChanged.connect(self.update_ignore_view)
+        initial_path = os.getcwd()
+        self.folder_tree.setRootIndex(self.folder_model.index(initial_path))
+        self.ignore_tree.setRootIndex(self.ignore_model.index(initial_path))
+        self.folder_label.setText(f"Selected Root Folder: {initial_path}")
+        self.root_path = initial_path
         self.center_window()
         
     def select_root_folder(self):
@@ -177,8 +182,8 @@ class FolderTreeVisualizer(QMainWindow):
         if folder:
             self.root_path = folder
             self.folder_label.setText(f"Selected Root Folder: {folder}")
-            self.folder_tree.setRootIndex(self.folder_model.index(os.getcwd()))
-            self.ignore_tree.setRootIndex(self.ignore_model.index(os.getcwd()))
+            self.folder_tree.setRootIndex(self.folder_model.index(folder))
+            self.ignore_tree.setRootIndex(self.ignore_model.index(folder))
 
             self.folder_model.checked_items.clear()
             self.ignore_model.checked_items.clear() 
