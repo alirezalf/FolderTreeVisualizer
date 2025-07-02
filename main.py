@@ -177,8 +177,8 @@ class FolderTreeVisualizer(QMainWindow):
         if folder:
             self.root_path = folder
             self.folder_label.setText(f"Selected Root Folder: {folder}")
-            self.folder_tree.setRootIndex(self.folder_model.index(folder))
-            self.ignore_tree.setRootIndex(self.ignore_model.index(folder))
+            self.folder_tree.setRootIndex(self.folder_model.index(os.getcwd()))
+            self.ignore_tree.setRootIndex(self.ignore_model.index(os.getcwd()))
 
             self.folder_model.checked_items.clear()
             self.ignore_model.checked_items.clear() 
